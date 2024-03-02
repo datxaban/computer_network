@@ -27,3 +27,79 @@ The Consultants will provide specific design that the construction people can re
 - Capacity needed to ensure the system operates efficiently
 - The system of switches, routers and cost estimates
 - Line speed internet connections
+
+# Propose solution
+
+## 1. Overall Structure:
+- **Floor**:
+    - **Floor 1**: Has 1 Administrative office, and may have some people come
+across with their own devices because this is the ground floor
+    - **Floor 2-4**: Has 4 small rooms, 2 large rooms
+    - **Floor 5**: Has 1 laboratory (large room), 1 large room, 4 small rooms
+- **Room**: 
+    - **Laboratory**: Has 30 computers
+    - **Administrative office**: Has 10 computers, and 20 people with 40 devices
+    - **Small room**: Has capacity for maximum 30 people with 60 devices
+    - **Large room**: Has capacity for maximum 60 people with 120 devices
+- **Equipment**:
+    - **Sensor**: Temperature sensors and light sensors collect data one time per
+    minute and after 5 minutes they will send this to central server. The
+    common data format size is fixed at 32Kb
+    - **Camera**: Surveillance cameras operate 24/7 and store data directly to server
+    with transfer rate of 100Mbps
+    - **Wifi**: Allocate data transfer rate for each connected device maximum 256
+    Kbps in 7:30AM – 5:30PM
+    - **Administrative office**: Desktop computers which can download 200MB
+    per day and send 10 emails per day with a maximum capacity of 10MB per
+    email.
+    - **Other rooms**: Desktop computers can download 200MB per day
+## 2. Network Traffic
+- **Device**: Assume in the peak hour, all people (included in the classroom and the
+hall) are using internet devices, each small room has maximum 60 devices and
+we have 4 small rooms for each floor, and 4 floors in total. For floor 1, there
+are 20 devices in the office and maximum 60 devices in the hall.
+Total: (120*2 + 60*4) *4 + 20 + 60 = 2000 devices, each device has maximum
+256 Kbps transmission rate and it’s reduced half in peak hour, so
+2000*128(Kbps) = 256 Mbps.
+- **Computers**: lab room has 30 computers, office 10 has computers, and the rest
+have only 1 computer.
+Total: 30 + 10 + 5 + 6*3 = 63 each one download 200 MB a day and average
+all pc need 5.72 Mbps traffic.
+- **Sum up: 261.72 Mbps**
+## 3. Storage Capacity
+- **Sensor**: each floor has 48 sensors except floor 1 has 12 sensors. Total 48*4 + 12 = 204 sensor -> 1880 Mb a day.
+- **Camera system**: 100 Mbps -> 8640000 Mb a day. Total: 1080 GB a day.
+## 4. Physical Design
+![Physical Design](/assets/physical.png "Physical Design")
+
+
+## 5. Logical diagram
+![Logical Design](/assets/logical.png "Logical Design")
+
+## 6. Equipment list used and expected cost:
+| Product               | Type | Number   |
+| :---                  |    :----              | ---: |
+| TP-LINK TL-SG5412F    | Switch 12-Port        | 1    |
+| TP-LINK TL-SF1008D    | Switch 8-Port         | 5    |
+| TP-LINK T3700G-28TQ   | Switch 12-Port        | 1    |
+| J-tech AHD VP-102AHDH | Camera                | 100  |
+| Intel Xeon E5-2609v3(1.9GHz/6-core/15MB/85W) + <br> Ram 32GB + mouse, keyboard   | Server + HardDisk(300TB) + Gears                         | 1    |
+| Fortigate 60D         | Firewall              | 1    |
+| 42U D1100 MICA        | Rack Cabinet          | 1    |
+| UTP CAT5              | Cable                 | 1000m| 
+| THERMASGARD®RTF1 SD LM235Z   | Thermal Sensor | 102  |
+| LS6B                  | Light Sensor          | 102  |
+|  Grandstream GWN7600  | Access point          | 3    |
+| Fiber300Eco+(300Mbps) |                       |      |
+
+- Total cost for 5 years: 863,489,330 vnd
+
+## 7. Advantages
+- HD Camera
+- Sensitive sensor system
+- Fexible network design
+- Server’s high security with firewall
+- High harddisk capacity: up to 1 year (284 days)
+## 8. Disadvantages
+- High price
+- Complex system of IOT devices
